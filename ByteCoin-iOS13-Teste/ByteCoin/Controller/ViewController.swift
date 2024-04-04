@@ -24,6 +24,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
     }
     
+   
+}
+//MARK: -- UIPickerView
+
+extension ViewController {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -42,6 +47,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
 }
 
+//MARK: -- Update ViewController
 
 extension ViewController: CoinManagerDelegate {
     

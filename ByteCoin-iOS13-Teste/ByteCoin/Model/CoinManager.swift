@@ -15,8 +15,6 @@ protocol CoinManagerDelegate {
 }
 
 struct CoinManager {
-    
-    
     let baseURL = "https://rest.coinapi.io/v1/exchangerate/BTC"
     let apiKey = "79D45437-57F0-45F1-B9CC-405B5EE480BC"
     var delegate: CoinManagerDelegate?
@@ -30,26 +28,23 @@ struct CoinManager {
             let task = session.dataTask(with: url) { (data, response, error) in
                 if let data = data {
                     do {
-//                        _ = String(data: data, encoding: .utf8)
-                        parseJSON(data/*, for: coinName*/)
+                        parseJSON(data)
                     } catch {
                         self.delegate?.didFailWithError(error: error)
                     }
                 }
             }
-            task.resume()
+        task.resume()
         }
     }
 
-    func parseJSON(_ data: Data/*, for currency: String*/) {
+    func parseJSON(_ data: Data) {
         let decoder = JSONDecoder()
-//        let coinName = currency
         do {
             let decodedData = try decoder.decode(CoinData.self, from: data)
             let rate = decodedData.rate
             print(rate)
             self.delegate?.didUpdateRate(rate: rate)
-            
         } catch {
             self.delegate?.didFailWithError(error: error)
         }
