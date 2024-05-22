@@ -6,6 +6,7 @@
 //  Copyright © 2019 Angela Yu. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 class WelcomeViewController: UIViewController {
@@ -14,7 +15,20 @@ class WelcomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        titleLabel.text = ""
+        var charIndex = 0
+        let titleText = "⚡️FlashChat"
+        for letter in titleText {
+            print("-")
+            print(charIndex)
+            print(letter)
+            Timer.scheduledTimer(withTimeInterval: 0.1 * Double(charIndex), repeats: false) { (timer) in
+                self.titleLabel.text?.append(letter)
+            }
+            charIndex += 1
+       
+        }
        
     }
     
