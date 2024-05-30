@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class RegisterViewController: UIViewController {
 
@@ -14,6 +15,22 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var passwordTextfield: UITextField!
     
     @IBAction func registerPressed(_ sender: UIButton) {
+        
+        if let email = emailTextfield.text, let password = passwordTextfield.text {
+            Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                
+                if let e = error {
+                    /*Aqui é se e recebi erro, ou seja, deixa de s
+                     er vazio, pois o error é um optinals*/
+                    print(e.localizedDescription)
+                } else {
+                    /*Para navegar para chatViewController*/
+                    self.performSegue(withIdentifier: K.registerSegue, sender: self)
+                }
+            }
+        }
+        
+        	
     }
-    
+     
 }
